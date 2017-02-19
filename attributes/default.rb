@@ -1,0 +1,1 @@
+default['ohmyzsh']['user'] = 'vagrant'

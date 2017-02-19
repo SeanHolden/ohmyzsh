@@ -1,10 +1,12 @@
 name 'ohmyzsh'
-maintainer 'The Authors'
-maintainer_email 'you@example.com'
+maintainer 'Sean Holden'
+maintainer_email 'sean@seanholden.net'
 license 'all_rights'
 description 'Installs/Configures ohmyzsh'
 long_description 'Installs/Configures ohmyzsh'
 version '0.1.0'
+
+depends 'git'
 
 # The `issues_url` points to the location where issues for this cookbook are
 # tracked.  A `View Issues` link will be displayed on this cookbook's page when

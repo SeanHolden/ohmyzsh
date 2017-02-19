@@ -2,17 +2,26 @@
 
 # Inspec test for recipe ohmyzsh::default
 
-# The Inspec reference, with examples and extensive documentation, can be
-# found at http://inspec.io/docs/reference/resources/
-
-unless os.windows?
-  describe user('root') do
-    it { should exist }
-    skip 'This is an example test, replace with your own test.'
-  end
+describe package('curl') do
+  it { should be_installed }
 end
 
-describe port(80) do
-  it { should_not be_listening }
-  skip 'This is an example test, replace with your own test.'
+describe package('zsh') do
+  it { should be_installed }
+end
+
+describe file('/home/vagrant/.zshrc') do
+  it { should exist }
+end
+
+describe directory('/home/vagrant/.oh-my-zsh') do
+  it { should exist }
+end
+
+describe file('/home/vagrant/install.sh') do
+  it { should_not exist }
+end
+
+describe file('/etc/shells') do
+  its('md5sum') { should eq 'bf63d8e59618ad825ffdca15aabdbcf9' }
 end
