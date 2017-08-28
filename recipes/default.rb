@@ -4,7 +4,8 @@
 #
 # Copyright:: 2017, Sean Holden, All Rights Reserved.
 #
-include_recipe 'git::default'
+
+include_recipe 'git'
 
 package 'curl'
 package 'zsh'

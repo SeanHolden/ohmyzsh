@@ -1,6 +1,6 @@
 # # encoding: utf-8
 
-# Inspec test for recipe ohmyzsh::default
+# Inspec test for recipe ohmyzsh::default on ubuntu platform
 
 describe package('curl') do
   it { should be_installed }
@@ -10,15 +10,15 @@ describe package('zsh') do
   it { should be_installed }
 end
 
-describe file('/home/vagrant/.zshrc') do
+describe file('/home/ubuntu/.zshrc') do
   it { should exist }
 end
 
-describe directory('/home/vagrant/.oh-my-zsh') do
+describe directory('/home/ubuntu/.oh-my-zsh') do
   it { should exist }
 end
 
-describe file('/home/vagrant/install.sh') do
+describe file('/home/ubuntu/install.sh') do
   it { should_not exist }
 end
 

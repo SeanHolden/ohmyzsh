@@ -13,13 +13,24 @@ verifier:
   name: inspec
 
 platforms:
-  - name: centos-7.2
+  #- name: centos-7.2
+  - name: ubuntu-16.04
+    driver:
+      box: ubuntu/xenial64
 
 suites:
-  - name: default
+  #- name: centos
+    #run_list:
+      #- recipe[ohmyzsh::default]
+    #verifier:
+      #inspec_tests:
+        #- test/smoke/centos
+    #attributes:
+
+  - name: ubuntu
     run_list:
       - recipe[ohmyzsh::default]
     verifier:
       inspec_tests:
-        - test/smoke/default
+        - test/smoke/ubuntu
     attributes:

@@ -60,4 +60,58 @@ describe 'ohmyzsh::default' do
       end
     end
   end
+
+  context 'When all attributes are default, on Ubuntu 16.04' do
+    let(:platform) { 'ubuntu' }
+    let(:version) { '16.04' }
+    let(:chef_run) {
+      ChefSpec::SoloRunner.new(platform: platform, version: version).
+        converge(described_recipe)
+    }
+    let(:ohmyzsh_installed) { false }
+
+    before do
+      stub_command("echo $SHELL | grep -c zsh").and_return(false)
+    end
+
+    it 'converges successfully' do
+      expect { chef_run }.to_not raise_error
+    end
+
+    describe 'curl' do
+      it 'installs successfully' do
+        expect(chef_run).to install_package('curl')
+      end
+    end
+
+    describe 'zsh' do
+      it 'installs successfully' do
+        expect(chef_run).to install_package('zsh')
+      end
+    end
+
+    describe '#templates' do
+      it 'creates ~/install.sh' do
+        expect(chef_run).to create_template('/home/ubuntu/install.sh').with(
+          owner: 'ubuntu',
+          group: 'ubuntu',
+          mode: '644'
+        )
+      end
+
+      it 'creates ~/install.sh' do
+        expect(chef_run).to create_template('/etc/shells').with(
+          owner: 'root',
+          group: 'root',
+          mode: '644'
+        )
+      end
+    end
+
+    describe 'oh-my-zsh' do
+      it 'executes command correctly' do
+        expect(chef_run).to run_execute('sh install.sh').with(user: 'ubuntu')
+      end
+    end
+  end
 end
